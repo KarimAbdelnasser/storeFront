@@ -7,10 +7,7 @@ This repo contains a basic Node and Express app to get you started in constructi
 
 ### INSTALLING
 Run this command to install dependencies ==> npm i
-Run this command to build ==> npm run build
-Run this command to create the dev database ==> npm run createDevDb
-Run this command to create the test database ==> npm run createTestDb
-
+You will need to install Pg Admin
 
 #### Setup environment
 Create a (.env) file with the required environment variables:
@@ -25,7 +22,9 @@ Create a (.env) file with the required environment variables:
     DB_PASSWORD=database's password
 
 ##### Start the server
-create the databases first for the dev and test environments in pg admin
+Run this command to build ==> npm run build
+Run this command to create the dev database ==> npm run createDevDb
+Run this command to create the test database ==> npm run createTestDb
 Run this command to start the server ==> npm run start
 Run this command to start the testing environment ==> npm run test
 Run this command to reset the migrate ==> npm run migrationReset
