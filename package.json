@@ -4,7 +4,9 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "start": "npm run build && db-migrate up && node dist/server.js",
+        "createDevDb": "set NODE_ENV=dev && node dist/db/db.js",
+        "createTestDb": "node dist/db/db.js",
+        "start": "npm run build && set NODE_ENV=dev&& db-migrate up && node dist/server.js",
         "build": "npx tsc",
         "test": "npm run build && set NODE_ENV=test && db-migrate up --env test && jasmine && db-migrate down --env test",
         "testDb-reset": "db-migrate reset --config ./database.json --e test",
