@@ -9,12 +9,19 @@ const product_type_1 = require("../types/product.type");
 const Product = new product_1.default();
 const create = async (req, res) => {
     try {
-        const { error } = product_type_1.productSchema.validate(req.body);
-        if (error) {
-            return res.status(400).send(error.details[0].message);
+        if (req.user) {
+            const { error } = product_type_1.productSchema.validate(req.body);
+            if (error) {
+                return res.status(400).send(error.details[0].message);
+            }
+            const newProduct = await Product.create({
+                ...req.body,
+                user_id: req.user._id || req.body.id,
+            });
+            return res
+                .status(201)
+                .json({ message: 'New product created successfully!', data: newProduct });
         }
-        const newProduct = await Product.create({ ...req.body, user_id: req.user._id || req.body.id });
-        return res.status(201).json({ message: 'New product created successfully!', data: newProduct });
     }
     catch (error) {
         res.status(500).json({ error: error.message });

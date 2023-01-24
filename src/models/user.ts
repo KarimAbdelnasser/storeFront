@@ -1,5 +1,6 @@
 import { User } from '../types/user.type';
 import db from '../db/db';
+
 type returnUser = {
   id: string;
   email?: string;
@@ -7,6 +8,7 @@ type returnUser = {
   lastname: string;
   password: string;
 };
+
 class UserModel {
   //Create a new user
   async create(user: User): Promise<returnUser> {

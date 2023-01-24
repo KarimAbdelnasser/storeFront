@@ -5,4 +5,5 @@ type Order = {
   products_ids?: [string];
   quantityOfEach?: [number];
 };
+
 export default Order;

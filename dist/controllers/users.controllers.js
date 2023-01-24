@@ -11,6 +11,7 @@ const user_type_1 = require("../types/user.type");
 const authToken_1 = __importDefault(require("../utilities/authToken"));
 const User = new user_1.default();
 dotenv_1.default.config();
+//Create a new user
 const create = async (req, res) => {
     try {
         const { error } = user_type_1.userSchema.validate(req.body);
@@ -33,49 +34,58 @@ const create = async (req, res) => {
     }
 };
 exports.create = create;
+//Get an exist user
 const getUser = async (req, res) => {
     try {
-        const user = await User.getUser(req.user._id);
-        return res.status(200).json({ data: user });
+        if (req.user) {
+            const user = await User.getUser(req.user._id);
+            return res.status(200).json({ data: user });
+        }
     }
     catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 exports.getUser = getUser;
+//Update user's data
 const update = async (req, res) => {
     try {
-        let updatedUser = {};
-        if ('password' in req.body) {
-            const { ...newUserData } = req.body;
-            const password = req.body.password;
-            const salt = await bcrypt_1.default.genSalt(Number(process.env.SALT));
-            const hashedPassword = await bcrypt_1.default.hash(password, salt);
-            newUserData.password = hashedPassword;
-            updatedUser = await User.update({
-                ...newUserData,
-                id: req.user._id,
-            });
+        if (req.user) {
+            let updatedUser = {};
+            if ('password' in req.body) {
+                const { ...newUserData } = req.body;
+                const password = req.body.password;
+                const salt = await bcrypt_1.default.genSalt(Number(process.env.SALT));
+                const hashedPassword = await bcrypt_1.default.hash(password, salt);
+                newUserData.password = hashedPassword;
+                updatedUser = await User.update({
+                    ...newUserData,
+                    id: req.user._id,
+                });
+            }
+            else {
+                const { ...newUserData } = req.body;
+                updatedUser = await User.update({ ...newUserData, id: req.user._id });
+            }
+            return res
+                .status(201)
+                .json({ message: 'This user has been updated successfully!', data: updatedUser });
         }
-        else {
-            const { ...newUserData } = req.body;
-            updatedUser = await User.update({ ...newUserData, id: req.user._id });
-        }
-        return res
-            .status(201)
-            .json({ message: 'This user has been updated successfully!', data: updatedUser });
     }
     catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 exports.update = update;
+//Delete an exist user
 const deleteUser = async (req, res) => {
     try {
-        const deletedUser = await User.delete(req.user._id);
-        return res
-            .status(201)
-            .json({ message: 'This user has been deleted successfully!', data: deletedUser });
+        if (req.user) {
+            const deletedUser = await User.delete(req.user._id);
+            return res
+                .status(201)
+                .json({ message: 'This user has been deleted successfully!', data: deletedUser });
+        }
     }
     catch (error) {
         res.status(500).json({ error: error.message });

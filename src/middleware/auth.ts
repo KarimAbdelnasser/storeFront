@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
-declare const process: any;
 
 export = function (req: Request & { user?: any }, res: Response, next: NextFunction) {
   try {
@@ -10,7 +9,7 @@ export = function (req: Request & { user?: any }, res: Response, next: NextFunct
     if (!token) {
       return res.status(401).send('Access denied, no token provided!');
     }
-    const decoded = jwt.verify(token, process.env.jwtPrivateKey);
+    const decoded = jwt.verify(token, process.env.jwtPrivateKey as Secret);
     req.user = decoded;
     next();
   } catch (err) {

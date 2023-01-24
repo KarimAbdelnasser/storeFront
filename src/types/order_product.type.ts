@@ -4,4 +4,5 @@ type Order_Product = {
   product_id: string;
   quantity: number;
 };
+
 export default Order_Product;

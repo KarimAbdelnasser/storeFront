@@ -1,9 +1,11 @@
 import Order from '../types/order.type';
 import db from '../db/db';
+
 type Prod = {
   id: string;
   quantity: number;
 };
+
 interface Result {
   id: string;
   status: string;
@@ -12,6 +14,7 @@ interface Result {
   product_id: string;
   quantity: number;
 }
+
 class OrderModel {
   //Create a new order
   async create(userId: string, products: Prod[]): Promise<Order> {
