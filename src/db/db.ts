@@ -22,4 +22,5 @@ const pool = new Pool(
         port: DB_PORT,
       }
 );
+
 export default pool;
