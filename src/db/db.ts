@@ -9,14 +9,14 @@ const pool = new Pool(
   NODE_ENV === 'test'
     ? {
         host: DB_HOST,
-        database: DB_DATABASE_TEST,
+        database: DB_DATABASE,
         user: DB_USER,
         password: DB_PASSWORD,
         port: DB_PORT,
       }
     : {
         host: DB_HOST,
-        database: DB_DATABASE,
+        database: DB_DATABASE_TEST,
         user: DB_USER,
         password: DB_PASSWORD,
         port: DB_PORT,
