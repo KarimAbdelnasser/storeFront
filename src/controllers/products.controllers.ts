@@ -1,9 +1,14 @@
 import { Request, Response } from 'express';
 import ProductModel from '../models/product';
+import { productSchema } from '../types/product.type';
 const Product = new ProductModel();
 
 export const create = async (req: Request & { user?: any }, res: Response) => {
   try {
+    const { error } = productSchema.validate(req.body);
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
     const newProduct = await Product.create({ ...req.body, user_id: req.user._id || req.body.id });
     return res.status(201).json({ message: 'New product created successfully!', data: newProduct });
   } catch (error) {

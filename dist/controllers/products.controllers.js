@@ -5,9 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteProduct = exports.update = exports.getOne = exports.getAll = exports.create = void 0;
 const product_1 = __importDefault(require("../models/product"));
+const product_type_1 = require("../types/product.type");
 const Product = new product_1.default();
 const create = async (req, res) => {
     try {
+        const { error } = product_type_1.productSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send(error.details[0].message);
+        }
         const newProduct = await Product.create({ ...req.body, user_id: req.user._id || req.body.id });
         return res.status(201).json({ message: 'New product created successfully!', data: newProduct });
     }

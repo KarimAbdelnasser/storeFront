@@ -35,12 +35,12 @@ describe('Test user endpoints responses', () => {
         });
         expect(response.status).toBe(201);
     });
-    it('Should return a status code 500, response with error null value in column "firstname" of relation "users" violates not-null constraint', async () => {
+    it('Should return a status code 400, response with error firstname is required', async () => {
         const response = await request.post('/user/').send({
             lastname: 'karim',
             password: 'Karim123',
         });
-        expect(response.status).toBe(500);
+        expect(response.status).toBe(400);
     });
     it("Should return a status code 200, response with the user's data", async () => {
         const response = await request.get('/user/me').set('x-auth-token', token);

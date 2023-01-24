@@ -28,6 +28,7 @@ class OrderModel {
             throw new Error(`${error.message}`);
         }
     }
+    //Get order
     async getOrder(id) {
         try {
             const con = await db_1.default.connect();

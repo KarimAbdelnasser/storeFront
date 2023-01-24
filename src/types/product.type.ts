@@ -1,3 +1,4 @@
+import Joi from 'joi';
 type Product = {
   id: string;
   name: string;
@@ -5,4 +6,9 @@ type Product = {
   price: number;
   user_id?: string;
 };
-export default Product;
+const schema = Joi.object({
+  name: Joi.string().min(3).max(20).required(),
+  description: Joi.string(),
+  price: Joi.number().min(1).required(),
+});
+export { Product, schema as productSchema };

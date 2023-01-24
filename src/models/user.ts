@@ -1,4 +1,4 @@
-import User from '../types/user.type';
+import { User } from '../types/user.type';
 import db from '../db/db';
 type returnUser = {
   id: string;

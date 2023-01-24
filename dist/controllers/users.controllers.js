@@ -7,11 +7,16 @@ exports.deleteUser = exports.update = exports.getUser = exports.create = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const user_1 = __importDefault(require("../models/user"));
+const user_type_1 = require("../types/user.type");
 const authToken_1 = __importDefault(require("../utilities/authToken"));
 const User = new user_1.default();
 dotenv_1.default.config();
 const create = async (req, res) => {
     try {
+        const { error } = user_type_1.userSchema.validate(req.body);
+        if (error) {
+            return res.status(400).send(error.details[0].message);
+        }
         const { ...newUserData } = req.body;
         const password = req.body.password;
         const salt = await bcrypt_1.default.genSalt(Number(process.env.SALT));

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import UserModel from '../models/user';
+import { userSchema } from '../types/user.type';
 import generateAuthToken from '../utilities/authToken';
 const User = new UserModel();
 dotenv.config();
@@ -9,6 +10,10 @@ declare const process: any;
 
 export const create = async (req: Request, res: Response) => {
   try {
+    const { error } = userSchema.validate(req.body);
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
     const { ...newUserData } = req.body;
     const password = req.body.password;
     const salt = await bcrypt.genSalt(Number(process.env.SALT));

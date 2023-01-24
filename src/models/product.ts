@@ -1,4 +1,4 @@
-import Product from '../types/product.type';
+import { Product } from '../types/product.type';
 import db from '../db/db';
 class ProductModel {
   //Create a new product
