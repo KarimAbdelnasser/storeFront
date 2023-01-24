@@ -246,11 +246,11 @@
 -   password: string;
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+- id : string;
+- id of each product in the order : [string];
+- quantity of each product in the order : [number];
+- user_id : string;
+- status of order (active or complete) : string;
 
 #### Order_Products
 -   id?: string;
