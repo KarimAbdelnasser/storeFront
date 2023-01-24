@@ -21,6 +21,7 @@ Create a (.env) file with the required environment variables:
     DB_PASSWORD=database's password
 
 ##### Start the server
+create the databases first for the dev and test environments in pg admin
 Run this command to start the server ==> npm run start
 Run this command to start the testing environment ==> npm run test
 Run this command to reset the migrate ==> npm run migrationReset
