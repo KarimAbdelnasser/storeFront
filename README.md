@@ -6,7 +6,8 @@ A storeFront backend API written in NodeJS.
 This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `npm` in your terminal at the project root.
 
 ### INSTALLING
-Run this command to install dependencies ==> npm i
+Run this command to install dependencies ==> npm i \n
+
 You will need to install Pg Admin
 
 #### Setup environment
