@@ -34,9 +34,9 @@ Create a (.env) file with the required environment variables:
 ##### Start the server
 Run this command to build ==> npm run build
 
-Run this command to create the dev database ==> npm run createDevDb
-
 Run this command to create the test database ==> npm run createTestDb
+
+Run this command to create the dev database ==> npm run createDevDb
 
 Run this command to start the server ==> npm run start
 
